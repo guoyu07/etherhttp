@@ -2,7 +2,6 @@
 namespace EtherHttp\Async;
 
 use EtherHttp\Common\ClientInterface;
-use React\Promise\Deferred;
 
 /**
  * Created by PhpStorm.

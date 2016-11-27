@@ -29,7 +29,7 @@ class Response extends ZendResponse
      *
      * @param string|StreamInterface $data
      * @return StreamInterface
-     * @throws InvalidArgumentException if $html is neither a string or stream.
+     * @throws \InvalidArgumentException if $html is neither a string or stream.
      */
     private function createBody($data)
     {

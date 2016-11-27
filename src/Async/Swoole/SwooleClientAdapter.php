@@ -4,7 +4,6 @@ namespace EtherHttp\Async\Swoole;
 use EtherHttp\Async\AsyncClientInterface;
 use EtherHttp\Common\DNSCache as DNS;
 use EtherHttp\Common\Response;
-use React\Promise\Deferred;
 use React\Promise\PromisorInterface;
 
 /**
@@ -46,7 +45,9 @@ class SwooleClientAdapter implements AsyncClientInterface
 
     public function setPath($path)
     {
-        $this->path = (string)$path;
+        if(!empty($path)){
+            $this->path = (string)$path;
+        }
         return $this;
     }
 
@@ -92,15 +93,15 @@ class SwooleClientAdapter implements AsyncClientInterface
         }
 
         $callback = function ($data) use (&$deferred) {
+            //swoole to psr headers
+            array_walk($data->headers, function (&$v) {
+                $v = explode(',', $v);
+            });
             $response = new Response(
                 $data->body,
                 $data->statusCode,
                 $data->headers
             );
-            //swoole to psr headers
-            array_walk($data->headers, function (&$v) {
-                $v = explode(',', $v);
-            });
             if ($data->statusCode < 400) {
                 $deferred->resolve($response);
             } else {
@@ -113,5 +114,11 @@ class SwooleClientAdapter implements AsyncClientInterface
                 $this->path . '?' . $this->query : $this->path,
             $callback
         );
+    }
+
+
+    public function close()
+    {
+        $this->client->close();
     }
 }

@@ -2,7 +2,6 @@
 namespace EtherHttp\Async;
 
 use EtherHttp\Common\Response;
-use Psr\Http\Message\RequestInterface;
 use React\Promise\Deferred;
 use React\Promise\Promise;
 
