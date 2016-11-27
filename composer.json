@@ -1,0 +1,21 @@
+{
+    "name": "qieqieplus/etherhttp",
+    "description": "swoole http library with psr-7 compatible",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "qieqieplus",
+            "homepage": "https://github.com/qieqieplus"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "EtherHttp\\": "src/"
+        },
+        "files": ["src/functions.php"]
+    },
+    "require": {
+        "zendframework/zend-diactoros": "^1.3",
+        "react/promise": "^2.4"
+    }
+}
